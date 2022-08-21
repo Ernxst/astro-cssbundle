@@ -33,26 +33,26 @@ importers:
 
   examples/basics:
     specifiers:
+      '@ernest/astro-cssbundle': workspace:*
       astro: ^1.0.6
-      astro-cssbundle: workspace:*
     devDependencies:
+      '@ernest/astro-cssbundle': link:../../packages/core
       astro: 1.0.6
-      astro-cssbundle: link:../../packages/core
 
   examples/blog:
     specifiers:
       '@astrojs/mdx': ^0.10.0
       '@astrojs/rss': ^1.0.0
       '@astrojs/sitemap': ^1.0.0
+      '@ernest/astro-cssbundle': workspace:*
       astro: ^1.0.6
-      astro-cssbundle: workspace:*
       rollup: ^2.78.1
     devDependencies:
       '@astrojs/mdx': 0.10.0_rollup@2.78.1
       '@astrojs/rss': 1.0.0
       '@astrojs/sitemap': 1.0.0
+      '@ernest/astro-cssbundle': link:../../packages/core
       astro: 1.0.6
-      astro-cssbundle: link:../../packages/core
       rollup: 2.78.1
 
   packages/core:
