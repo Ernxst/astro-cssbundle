@@ -44,6 +44,9 @@
 		"node": ">=16.0.0",
 		"pnpm": ">=7.5.0"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"packageManager": "pnpm@7.5.2",
 	"prettier": {
 		"printWidth": 80,
