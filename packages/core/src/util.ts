@@ -41,7 +41,7 @@ export async function injectLink(
 	cssFilePath: string,
 	preload: boolean
 ) {
-	const htmlContent = (await fs.promises.readFile(htmlFilePath)).toString();
+	const htmlContent = await fs.promises.readFile(htmlFilePath, "utf-8");
 
 	const [doctype] = HTML.parse(htmlContent) as [TagAstElement];
 	const htmlTag = getTag("html", doctype);

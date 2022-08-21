@@ -11,14 +11,14 @@ interface CommentAstElement {
 interface TagAstElement {
 	type: "tag";
 	name: string;
-	attrs: { [attributeName: string]: string | number | boolean };
+	attrs: Record<string, string | number | boolean>;
 	voidElement: boolean;
 	children: AstElement[];
 }
 
 interface ComponentAstElement extends Omit<TagAstElement, "type" | "children"> {
 	type: "component";
-	children: []
+	children: [];
 }
 
 type AstElement = TextAstElement | TagAstElement | ComponentAstElement;
