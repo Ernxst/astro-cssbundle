@@ -38,10 +38,10 @@
 	"description": "A plugin to combine all your CSS files into one and optionally remove the references to the old files from your HTML pages.",
 	"author": "Ernest Nkansah-Badu",
 	"license": "MIT",
-	"homepage": "https://next.ernestbadu.me",
+	"homepage": "https://github.com/Ernxst/astro-cssbundle",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Ernxst"
+		"url": "https://github.com/Ernxst/astro-cssbundle"
 	},
 	"files": [
 		"dist"
