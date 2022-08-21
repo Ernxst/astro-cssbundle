@@ -56,7 +56,8 @@ export async function injectLink(
 
 	const link = createLinkTag(cssFilePath, preload);
 	head.children.push(link);
-	await fs.promises.writeFile(htmlFilePath, HTML.stringify([doctype]));
+	const content = `<!DOCTYPE html>\n${HTML.stringify([htmlTag])}`;
+	await fs.promises.writeFile(htmlFilePath, content);
 }
 
 function getTag(tagName: string, ast: AstElement) {
