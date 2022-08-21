@@ -1,7 +1,7 @@
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import bundle from "@ernest/astro-cssbundle";
+import bundle from "@ernxst/astro-cssbundle";
+import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
