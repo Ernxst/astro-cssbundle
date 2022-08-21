@@ -1,0 +1,58 @@
+{
+	"name": "@ernest/astro-cssbundle",
+	"version": "0.0.1",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"typesVersions": {
+		"*": {
+			".": [
+				"./dist/index.d.ts"
+			]
+		}
+	},
+	"scripts": {
+		"build": "tsup --clean",
+		"build:dts": "tsup --dtsOnly"
+	},
+	"devDependencies": {
+		"fast-glob": "3.2.11",
+		"globby": "13.1.2",
+		"html-parse-stringify": "3.0.1",
+		"tsup": "6.2.2",
+		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"astro": "^1.0.6"
+	},
+	"description": "A plugin to combine all your CSS files into one and optionally remove the references to the old files from your HTML pages.",
+	"author": "Ernest Nkansah-Badu",
+	"license": "MIT",
+	"homepage": "https://next.ernestbadu.me",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ernxst"
+	},
+	"files": [
+		"dist"
+	],
+	"keywords": [
+		"css",
+		"code-splitting",
+		"bundling",
+		"astro-integration"
+	],
+	"engines": {
+		"node": ">=16.0.0",
+		"pnpm": ">=7.5.0"
+	},
+	"packageManager": "pnpm@7.5.2"
+}

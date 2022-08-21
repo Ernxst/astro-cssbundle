@@ -1,0 +1,41 @@
+{
+	"[astro]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.tabSize": 2,
+	"cSpell.words": [
+		"antfu",
+		"astro",
+		"commitlint",
+		"demi",
+		"esbuild",
+		"galaxia",
+		"iconify",
+		"intlify",
+		"nanostores",
+		"pinia",
+		"pnpm",
+		"supsertruct",
+		"svelte",
+		"tauri",
+		"tsup",
+		"typecheck",
+		"unocss",
+		"unplugin",
+		"Vite",
+		"vitejs",
+		"Vitesse",
+		"vitest",
+		"webp",
+		"xstate"
+	],
+	"editor.formatOnSave": false,
+	"files.associations": {
+		"**/*.env.*": "properties"
+	},
+	"typescript.tsdk": "./node_modules/typescript/lib",
+	"markdownlint.config": {
+		"no-inline-html": false
+	},
+	"prettier.documentSelectors": ["**/*.astro"]
+}

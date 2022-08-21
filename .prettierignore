@@ -1,0 +1,15 @@
+# Directories
+node_modules
+.turbo
+.idea
+**/dist
+**/coverage
+
+# Files
+README.md
+LICENSE
+pnpm-lock.yaml
+pnpm-workspace.yaml
+*.gitignore
+*.log
+*.lock
