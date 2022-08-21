@@ -8,5 +8,12 @@ export default defineConfig({
 	splitting: false,
 	sourcemap: true,
 	dts: true,
-	skipNodeModulesBundle: true,
+	banner(ctx) {
+		if (ctx.format === "esm") {
+			return {
+				js: `import { createRequire } from 'module';const require = createRequire(process.cwd());`,
+			};
+		}
+		return { js: "" };
+	},
 });

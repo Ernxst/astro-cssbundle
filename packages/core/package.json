@@ -24,7 +24,6 @@
 		"build:dts": "tsup --dtsOnly"
 	},
 	"devDependencies": {
-		"fast-glob": "3.2.11",
 		"globby": "13.1.2",
 		"html-parse-stringify": "3.0.1",
 		"tsup": "6.2.2",
@@ -32,6 +31,9 @@
 	},
 	"dependencies": {
 		"astro": "^1.0.6"
+	},
+	"peerDependencies": {
+		"astro": "*"
 	},
 	"description": "A plugin to combine all your CSS files into one and optionally remove the references to the old files from your HTML pages.",
 	"author": "Ernest Nkansah-Badu",
