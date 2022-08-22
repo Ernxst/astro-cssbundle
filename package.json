@@ -2,6 +2,10 @@
 	"name": "root",
 	"version": "0.0.1",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ernxst/astro-cssbundle.git"
+	},
 	"workspaces": [
 		"packages/*",
 		"examples/*"
@@ -21,7 +25,7 @@
 		"prepare": "husky install",
 		"--------------------------------------------------------------------------------------": "",
 		"prepublishOnly": "pnpm run build",
-		"release": "pnpm run build && changeset tag",
+		"release": "pnpm run build && changeset publish",
 		"version": "changeset version && pnpm install --no-frozen-lockfile && pnpm run format"
 	},
 	"devDependencies": {
@@ -29,23 +33,18 @@
 		"@changesets/cli": "2.24.3",
 		"@commitlint/cli": "17.0.3",
 		"@commitlint/config-conventional": "17.0.3",
+		"husky": "8.0.1",
 		"nano-staged": "0.8.0",
 		"prettier": "2.7.1",
 		"prettier-plugin-astro": "0.5.0",
 		"prettier-plugin-toml": "0.3.1",
-		"rimraf": "3.0.2"
-	},
-	"dependencies": {
-		"husky": "8.0.1",
+		"rimraf": "3.0.2",
 		"turbo": "1.4.3",
 		"typescript": "4.7.4"
 	},
 	"engines": {
 		"node": ">=16.0.0",
 		"pnpm": ">=7.5.0"
-	},
-	"publishConfig": {
-		"access": "public"
 	},
 	"packageManager": "pnpm@7.5.2",
 	"prettier": {

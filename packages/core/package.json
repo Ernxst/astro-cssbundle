@@ -41,7 +41,8 @@
 	"homepage": "https://github.com/Ernxst/astro-cssbundle",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Ernxst/astro-cssbundle"
+		"url": "https://github.com/Ernxst/astro-cssbundle.git",
+		"directory": "packages/core"
 	},
 	"files": [
 		"dist"
