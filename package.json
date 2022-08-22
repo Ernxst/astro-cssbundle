@@ -14,7 +14,7 @@
 		"dev": "turbo run dev --parallel",
 		"preview": "turbo run preview --parallel",
 		"-------------------------------------------------------------------------------": "",
-		"build": "turbo run build",
+		"build": "turbo run build --filter=!@example/*",
 		"build:dts": "turbo run build:dts",
 		"----------------------------------------------------------------------------------": "",
 		"typecheck": "turbo run typecheck",
