@@ -1,6 +1,6 @@
 # 🚀 Astro CSS Bundle
 
-Currently, there is a bug with Astro (or Vite?) that does not inject a link to the stylesheet when `vite.build.cssCodeSplit` is set to `false`. So, this integration does that.
+Currently, there is a [bug](https://github.com/withastro/astro/issues/4413) with Astro (or Vite?) that does not inject a link to the stylesheet when `vite.build.cssCodeSplit` is set to `false`. So, this integration does that and also allows you to customise how to preload the stylesheet.
 
 ## Installation
 
@@ -40,11 +40,17 @@ export default defineConfig({
  splitting is not disabled, this integration will only inject a link to
  the first `.css` file found.
   - default: `true`
-- `preload` -  Whether to generate a `<link />` tag with `rel="preload"` and then another
- to actually load the stylesheet. Can improve page performance.
-  - default: `true`
+- `preload` -  The mechanism to use for lazy-loading the stylesheet. Can improve page
+   performance.
+  - Inspired entirely by [Google Critters' preload strategy](https://github.com/GoogleChromeLabs/critters#preloadstrategy)
+    - `"default"`: Move stylesheet links to the end of the document and insert preload meta tags in their place.
+    - `"body"`: Move all external stylesheet links to the end of the document.
+    - `"swap"`: Convert stylesheet links to preloads that swap to rel="stylesheet" once loaded.
+    - `"swap-high"`: Use `<link rel="alternate stylesheet preload">` and swap to `rel="stylesheet"` once loaded.
+    - `false`: Disables adding preload tags.
+  - default: `default`
 
-## 💡 Contributing
+## Contributing
 
 To get started with development, you will need an editor (VS Code is recommended), a browser that runs JavaScript and some extra prerequisites:
 
@@ -59,7 +65,7 @@ git clone https://github.com/Ernxst/astro-cssbundle.git
 
 Then, install dependencies and start coding.
 
-### 💪🏼 Submitting Improvements
+### Submitting Improvements
 
 If you have a suggestion that would make this app better, please fork the repo and create a pull request. You can also
 simply open an issue with the tag "`enhancement`".

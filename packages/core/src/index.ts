@@ -2,17 +2,25 @@ import { getCSSFilePath, injectLink } from "@/util";
 import type { AstroIntegration, AstroConfig } from "astro";
 import path from "node:path";
 import { globby } from "globby";
-
-// TODO: Preload strategy "onload" | "defer" in `preload` key below
+import type { PreloadStrategy } from "@/create-link";
 
 export interface AstroCSSBundleOptions {
 	/**
-	 * Whether to generate a `<link />` tag with `rel="preload"` and then another
-	 * to actually load the stylesheet. Can improve page performance.
+	 * The mechanism to use for lazy-loading the stylesheet. Can improve page
+	 * performance.
 	 *
-	 * @default true
+	 * Inspired entirely by Google Critters' preload strategy:
+	 * https://github.com/GoogleChromeLabs/critters#preloadstrategy
+	 *
+	 * - `"default"`: Move stylesheet links to the end of the document and insert preload meta tags in their place.
+	 * - `"body"`: Move all external stylesheet links to the end of the document.
+	 * - `"swap"`: Convert stylesheet links to preloads that swap to rel="stylesheet" once loaded.
+	 * - `"swap-high"`: Use `<link rel="alternate stylesheet preload">` and swap to `rel="stylesheet"` once loaded.
+	 * - `false`: Disables adding preload tags.
+	 *
+	 * @default `default`
 	 */
-	preload?: boolean;
+	preload?: PreloadStrategy;
 	/**
 	 * Whether the plugin should automatically override the Astro config and
 	 * set `vite.build.cssCodeSplit` to `false`.
@@ -66,7 +74,7 @@ const PLUGIN_NAME = "astro-css-bundle";
 export default function bundle(
 	options?: AstroCSSBundleOptions
 ): AstroIntegration {
-	const { preload = true, disableSplitting = true } = options ?? {};
+	const { preload = "default", disableSplitting = true } = options ?? {};
 	let astroConfig: AstroConfig;
 	return {
 		name: PLUGIN_NAME,

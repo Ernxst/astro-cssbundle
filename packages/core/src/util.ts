@@ -2,6 +2,9 @@ import type { AstroConfig } from "astro";
 import { globby } from "globby";
 import fs from "fs";
 import HTML from "html-parse-stringify";
+import { createLinkTag } from "@/create-link";
+import type { PreloadStrategy } from "@/create-link";
+import { getTag, hasLink } from "@/ast-helpers";
 
 export async function getCSSFilePath(
 	dir: string,
@@ -39,7 +42,7 @@ export async function getCSSFilePath(
 export async function injectLink(
 	htmlFilePath: string,
 	cssFilePath: string,
-	preload: boolean
+	preload: PreloadStrategy
 ) {
 	const htmlContent = await fs.promises.readFile(htmlFilePath, "utf-8");
 
@@ -54,50 +57,13 @@ export async function injectLink(
 		return;
 	}
 
-	const link = createLinkTag(cssFilePath, preload);
-	head.children.push(link);
-	const content = `<!DOCTYPE html>\n${HTML.stringify([htmlTag])}`;
-	await fs.promises.writeFile(htmlFilePath, content);
-}
-
-function getTag(tagName: string, ast: AstElement) {
-	if ("children" in ast) {
-		const [item] = ast.children.filter(
-			(t) => t.type === "tag" && t.name === tagName
-		);
-		return item as TagAstElement;
+	const { headTag, bodyTag } = createLinkTag(cssFilePath, preload);
+	if (headTag) head.children.push(headTag);
+	if (bodyTag) {
+		const body = getTag("body", htmlTag);
+		body.children.push(bodyTag);
 	}
 
-	throw new Error(`This ast is not a tag element`);
-}
-
-function createLinkTag(cssFilePath: string, preload: boolean): TagAstElement {
-	const attrs = preload
-		? {
-				rel: "preload",
-				as: "style",
-				onload: "this.onload=null;this.rel='stylesheet'",
-		  }
-		: {
-				rel: "stylesheet",
-		  };
-
-	return {
-		type: "tag",
-		name: "link",
-		// @ts-ignore
-		attrs: {
-			href: cssFilePath,
-			...attrs,
-		},
-		// Self closing
-		voidElement: true,
-		children: [],
-	};
-}
-
-function hasLink(head: TagAstElement, stylesheet: string) {
-	return head.children.some(
-		(s) => s.type === "tag" && s.name === "link" && s.attrs.href === stylesheet
-	);
+	const content = `<!DOCTYPE html>\n${HTML.stringify([htmlTag])}`;
+	await fs.promises.writeFile(htmlFilePath, content);
 }

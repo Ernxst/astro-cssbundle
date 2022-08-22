@@ -11,7 +11,7 @@ interface CommentAstElement {
 interface TagAstElement {
 	type: "tag";
 	name: string;
-	attrs: Record<string, string | number | boolean>;
+	attrs: Record<string, unknown>;
 	voidElement: boolean;
 	children: AstElement[];
 }
