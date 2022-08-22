@@ -1,6 +1,6 @@
 {
 	"name": "@ernxst/astro-cssbundle",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"type": "module",
 	"exports": {
 		".": {
@@ -35,7 +35,7 @@
 	"peerDependencies": {
 		"astro": "*"
 	},
-	"description": "A plugin to combine all your CSS files into one and optionally remove the references to the old files from your HTML pages.",
+	"description": "An Astro integration to inject the missing link to the built CSS stylesheet when Vite's CSS code splitting is disabled.",
 	"author": "Ernest Nkansah-Badu",
 	"license": "MIT",
 	"homepage": "https://github.com/Ernxst/astro-cssbundle",
