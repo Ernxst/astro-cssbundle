@@ -23,7 +23,7 @@ export function createLinkTag(
 		headTag: head
 			? {
 					...LINK_PROPS,
-          children: [],
+					children: [],
 					attrs: {
 						href: cssFilePath,
 						...head,
@@ -33,7 +33,7 @@ export function createLinkTag(
 		bodyTag: body
 			? {
 					...LINK_PROPS,
-          children: [],
+					children: [],
 					attrs: {
 						href: cssFilePath,
 						...body,

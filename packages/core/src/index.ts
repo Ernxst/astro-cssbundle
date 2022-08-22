@@ -142,7 +142,6 @@ export default function bundle(
 						if (!s.endsWith(".html")) s = `${s}.html`;
 						return s;
 					});
-					console.log(ignore);
 					const htmlPages = await globby([`${base}/**/*.html`, ...ignore]);
 					await Promise.all(
 						htmlPages.map((s) => injectLink(s, filePath, preload))
