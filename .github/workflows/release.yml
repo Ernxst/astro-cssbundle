@@ -1,4 +1,3 @@
-# TODO: Create release for native desktop build
 name: 📤 Release
 
 on:
@@ -9,11 +8,13 @@ on:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  FORCE_COLOR: true
   CI: true
 
 jobs:
   release:
     name: 🌍 Release
+    if: ${{ github.repository_owner == 'Ernxst' }}
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
@@ -25,13 +26,19 @@ jobs:
       - name: 📤 Install dependencies
         uses: ./.github/actions/deps
 
+      - name: 🛠 Build Packages
+        run: pnpm run build
+
       - name: 🪢 Create Release Pull Request
         id: changesets
         uses: changesets/action@v1
         with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm run release
-          commit: "chore: update versions"
-          title: "chore: update versions"
+          version: pnpm run version
+          publish: pnpm exec changeset publish
+          commit: "chore(ci): release"
+          title: "chore(ci): release"
         env:
+          # Needs access to push to main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Needs access to publish to npm
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
