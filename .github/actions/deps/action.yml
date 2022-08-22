@@ -47,7 +47,6 @@ runs:
 
     - name: 📥 Install dependencies
       env:
-        # Set env to development so all deps are installed
         NODE_ENV: ${{ inputs.node-env }}
       shell: bash
-      run: pnpm install --${{ inputs.node-env }}
+      run: pnpm install
