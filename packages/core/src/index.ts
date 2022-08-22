@@ -32,6 +32,15 @@ export interface AstroCSSBundleOptions {
 	 * @default true
 	 */
 	disableSplitting?: boolean;
+	/**
+	 * Glob pattern (or an array of glob patterns) of pages not to inject links
+	 * into. Including the `.html` extension in the pattern is entirely optional.
+	 *
+	 * By default, all pages are included. Negative patterns are also supported.
+	 *
+	 * @default []
+	 */
+	exclude?: string | string[];
 }
 
 const PLUGIN_NAME = "astro-css-bundle";
@@ -74,8 +83,13 @@ const PLUGIN_NAME = "astro-css-bundle";
 export default function bundle(
 	options?: AstroCSSBundleOptions
 ): AstroIntegration {
-	const { preload = "default", disableSplitting = true } = options ?? {};
+	const {
+		preload = "default",
+		disableSplitting = true,
+		exclude = [],
+	} = options ?? {};
 	let astroConfig: AstroConfig;
+
 	return {
 		name: PLUGIN_NAME,
 		hooks: {
@@ -116,7 +130,20 @@ export default function bundle(
 				);
 
 				if (filePath) {
-					const htmlPages = await globby(`${base}/**/*.html`);
+					const ignoreBase = typeof exclude === "string" ? [exclude] : exclude;
+					const ignore = ignoreBase.map((s) => {
+						if (s.startsWith("!")) {
+							s = s.slice(1);
+							if (!s.startsWith(base)) s = `${base}/${s}`;
+						} else {
+							if (!s.startsWith(base)) s = `${base}/${s}`;
+							s = `!${s}`;
+						}
+						if (!s.endsWith(".html")) s = `${s}.html`;
+						return s;
+					});
+					console.log(ignore);
+					const htmlPages = await globby([`${base}/**/*.html`, ...ignore]);
 					await Promise.all(
 						htmlPages.map((s) => injectLink(s, filePath, preload))
 					);
