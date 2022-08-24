@@ -1,8 +1,4 @@
-/**
- * Inspired entirely by Google Critters' preload strategy
- * https://github.com/GoogleChromeLabs/critters#preloadstrategy
- */
-export type PreloadStrategy = "default" | "swap" | "swap-high" | "body" | false;
+import { PreloadStrategy } from "@/types";
 
 const LINK_PROPS = {
 	type: "tag",
@@ -18,7 +14,7 @@ export function createLinkTag(
 	headTag?: TagAstElement;
 	bodyTag?: TagAstElement;
 } {
-	const { head, body } = getAttrs(preload);
+	const { head, body } = getBaseAttrs(preload);
 	return {
 		headTag: head
 			? {
@@ -43,7 +39,7 @@ export function createLinkTag(
 	};
 }
 
-function getAttrs(strategy: PreloadStrategy) {
+function getBaseAttrs(strategy: PreloadStrategy) {
 	switch (strategy) {
 		case "default":
 			return {
