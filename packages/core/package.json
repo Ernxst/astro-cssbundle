@@ -1,6 +1,6 @@
 {
 	"name": "@ernxst/astro-cssbundle",
-	"version": "0.0.6",
+	"version": "1.0.0",
 	"type": "module",
 	"exports": {
 		".": {
