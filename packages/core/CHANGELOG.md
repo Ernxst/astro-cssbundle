@@ -1,5 +1,11 @@
 # @ernxst/astro-cssbundle
 
+## 1.0.0
+
+### Major Changes
+
+- [`438fa24`](https://github.com/Ernxst/astro-cssbundle/commit/438fa249556e45f5b5f9e68cf3bcce1213b606a9) Thanks [@Ernxst](https://github.com/Ernxst)! - add new options; adjust overriding behaviour
+
 ## 0.0.6
 
 ### Patch Changes
