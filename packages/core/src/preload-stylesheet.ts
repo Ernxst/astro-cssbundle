@@ -32,7 +32,7 @@ export async function preloadStylesheets(
 	 * If preloading is disabled, there's no point in overriding links
 	 */
 	if (override && preload) replaced = overrideLinks({ head, body, preload });
-	
+
 	/**
 	 * If it does have the link (and overriding is enabled), it will be handled
 	 * by `overrideLinks()`
