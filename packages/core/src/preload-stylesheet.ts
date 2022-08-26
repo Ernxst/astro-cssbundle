@@ -28,21 +28,20 @@ export async function preloadStylesheets(
 	const head = getTag("head", htmlTag);
 	const body = getTag("body", htmlTag);
 
-	if (override) {
-		/**
-		 * If preloading is disabled, there's no point in overriding links
-		 */
-		if (preload) replaced = overrideLinks({ head, body, preload });
-		/**
-		 * If it does have the link (and overriding is enabled), it will be handled
-		 * by `overrideLinks()`
-		 */
-		if (stylesheetPath && !hasLink(head, stylesheetPath)) {
-			const { headTag, bodyTag } = createLinkTag(stylesheetPath, preload);
-			if (headTag) head.children.push(headTag);
-			if (bodyTag) body.children.push(bodyTag);
-			replaced = true;
-		}
+	/**
+	 * If preloading is disabled, there's no point in overriding links
+	 */
+	if (override && preload) replaced = overrideLinks({ head, body, preload });
+	
+	/**
+	 * If it does have the link (and overriding is enabled), it will be handled
+	 * by `overrideLinks()`
+	 */
+	if (stylesheetPath && !hasLink(head, stylesheetPath)) {
+		const { headTag, bodyTag } = createLinkTag(stylesheetPath, preload);
+		if (headTag) head.children.push(headTag);
+		if (bodyTag) body.children.push(bodyTag);
+		replaced = true;
 	}
 
 	if (replaced) {
@@ -65,7 +64,7 @@ function overrideLinks(options: {
 	body: TagAstElement;
 	preload: PreloadStrategy;
 }) {
-	let replaced = true;
+	let replaced = false;
 	const { head, body, preload } = options;
 	const length = head.children.length;
 
